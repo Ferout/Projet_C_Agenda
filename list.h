@@ -4,13 +4,14 @@
 
 #ifndef UNTITLED4_LIST_H
 #define UNTITLED4_LIST_H
+#define MAX_LEVEL 15
 
 #include "cell.h"
 
 // Definition of the list structure
 typedef struct List {
     int maxLevels;  // Maximum number of levels in the list
-    Cell* head;     // Head of the list
+    Cell* head[];     // Head of the list
 } List;
 
 // Function to create an empty list with the given maximum number of levels
@@ -30,6 +31,11 @@ void displayAllLevelsAligned(List* list);
 
 // Function to insert a cell at the correct position to keep the list sorted
 void insertCellSorted(List* list, Cell* cell);
+
+List* MakeBigList(int n);
+Cell* search(List* list, int value);
+void insertSorted(List* list, Cell* cell);
+void displayListByLevel(List* list, int level);
 
 
 #endif //UNTITLED4_LIST_H
