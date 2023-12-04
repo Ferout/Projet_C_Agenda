@@ -6,6 +6,14 @@
 #include <string.h>
 
 int main() {
+
+    List* list = MakeBigList( 3);
+    displayAllLevelsAligned(list);
+    if(search(list,8) != NULL){
+        printf("Oui\n");
+    }
+
+
     // Création d'une cellule avec 3 niveaux
     Cell* cell1 = createCell(10, 3);
     Cell* cell2 = createCell(20, 2);
@@ -15,9 +23,9 @@ int main() {
     List* myList = createList(4);
 
     // Insertion de cellules dans la liste
-    insertCellAtHead(myList, cell1);
-    insertCellAtHead(myList, cell2);
-    insertCellAtHead(myList, cell3);
+    insertSorted(myList, cell1);
+    insertSorted(myList, cell2);
+    insertSorted(myList, cell3);
 
     // Affichage des cellules à un niveau donné
     displayCellsAtLevel(myList, 1);
@@ -30,7 +38,7 @@ int main() {
 
     // Insertion d'une cellule triée
     Cell* cell4 = createCell(15, 2);
-    insertCellSorted(myList, cell4);
+    insertSorted(myList, cell4);
 
     // Affichage de tous les niveaux de la liste après l'insertion triée
     displayAllLevels(myList);
