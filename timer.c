@@ -1,5 +1,5 @@
 //
-// Created by flasque on 11/10/2023.
+// Created by Aurélien on 23/11/2023.
 //
 
 #include <stdio.h>
@@ -43,3 +43,5 @@ char *getTimeAsString()
     // return the buffer
     return buffer;
 }
+
+#include "timer.h"
