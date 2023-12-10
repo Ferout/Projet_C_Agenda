@@ -1,13 +1,15 @@
 //
-// Created by Aurélien on 23/11/2023.
+// Created by Aurélien on 06/12/2023.
 //
+
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "fonction.h"
-#include "models.h"
+#include "contact.h"
 #include "timer.h"
 #include "affichage.h"
 
@@ -20,7 +22,81 @@
 #define MENU_EXTRACT_APPOINTMENTS 6
 #define MENU_QUIT 7
 
-int main() {
+void Partie1(){
+
+
+    //Test pour la partie 1
+
+    printf("Test Partie 1 : \n");
+
+    printf("\n");
+
+    printf("Liste a niveau vide : \n");
+
+    int my_empty_list_level = 5;
+    t_d_list* my_empty_list = create_list(my_empty_list_level);
+    display_list(my_empty_list);
+
+    printf("\n");
+
+    printf("Insertion et affichage aligne : \n");
+
+    int my_list_level = 5;
+    t_d_list* my_list = create_list(my_list_level);
+
+    insert_cell(91, 3, my_list);
+    insert_cell(59, 5, my_list);
+    insert_cell(56, 3, my_list);
+    insert_cell(32, 5, my_list);
+    insert_cell(31, 2, my_list);
+    insert_cell(25, 1, my_list);
+    insert_cell(18, 3, my_list);
+
+    display_list(my_list);
+
+    printf("\n");
+
+}
+
+void Partie2(){
+
+    //Test pour la partie 2
+
+    t_d_list *my_list_2 = MakeBigList(3);
+    printf("Enregistrement des temps d execution \n");
+
+    for (int n = 3; n < 16; ++n) {
+
+        int valueToSearch = pow(2, n) - 1;
+        t_d_list *my_list_2 = MakeBigList(n);
+
+
+        startTimer();
+        for (int j = 0; j <= 100000; ++j) {
+            search_cell_classic(valueToSearch,my_list_2 );
+        }
+        stopTimer();
+
+        char *time_lvl0 = getTimeAsString();
+
+        startTimer();
+        for (int j = 0; j <= 100000; ++j) {
+            search_cell_dichotomy(valueToSearch,my_list_2 );
+        }
+        stopTimer();
+        char *time_all_levels = getTimeAsString();
+
+        printf("n=%d | niveau 0: %s  et multi-niveau: %s \n", n, time_lvl0, time_all_levels);
+
+    }
+
+    printf("\n");
+
+}
+
+int Partie3(){
+    printf("Partie 3 Agenda : \n");
+    printf("\n");
     // Création de la liste principale
     t_input_list* MAIN_LIST = create_input_list(4);
     int app_state = 1;
@@ -85,3 +161,10 @@ int main() {
     return 0;
 }
 
+
+int main() {
+
+    //Partie1();
+    //Partie2();
+    Partie3();
+}

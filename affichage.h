@@ -5,7 +5,7 @@
 #ifndef AGENDA_GOMEZ_AFFICHAGE_H
 #define AGENDA_GOMEZ_AFFICHAGE_H
 
-#include "models.h"
+#include "contact.h"
 
 void menu_add_contact(t_input_list* input_list);
 

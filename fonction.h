@@ -30,7 +30,10 @@ void display_cell(t_d_cell*);
 void display_list(t_d_list*);
 
 void insert_cell(int, int, t_d_list*);
+
 t_d_cell* search_cell_classic(int value, t_d_list* list);
-t_d_cell* search_cell_optimal(int value, t_d_list* list);
+t_d_cell* search_cell_dichotomy(int value, t_d_list* list);
+
+t_d_list* MakeBigList(int n);
 
 #endif //AGENDA_GOMEZ_FONCTION_H

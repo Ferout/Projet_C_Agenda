@@ -5,7 +5,7 @@
 #include "fonction.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <math.h>
 t_d_cell *create_cell(int value, int level) {
 
     t_d_cell *cell = (t_d_cell*) malloc(sizeof(t_d_cell));
@@ -56,7 +56,7 @@ void display_list(t_d_list* list) {
 
         while(cursor != NULL) {
             if(tmp == NULL) {
-                printf("----------");
+                printf("-----------");
                 cursor = cursor->next[0];
                 continue;
             }
@@ -65,7 +65,7 @@ void display_list(t_d_list* list) {
                 tmp = tmp->next[i];
 
             } else {
-                printf("----------");
+                printf("-----------");
             }
             cursor = cursor->next[0];
         }
@@ -136,27 +136,49 @@ t_d_cell* search_cell_classic(int value, t_d_list* list) {
  * @param list
  * @return
  */
-t_d_cell* search_cell_optimal(int value, t_d_list* list) {
+t_d_cell* search_cell_dichotomy(int value, t_d_list* list) {
 
-    t_d_cell *tmp = list->heads[list->max_level - 1];
-
-    for(int i = list->max_level - 1; i >= 0; i--) {
-        while(tmp != NULL && tmp->value < value) {
-
-            tmp = tmp->next[i];
+    t_d_cell *temp = NULL;
+    int i = list->max_level - 1;
+    temp = list->heads[i];
+    while (temp != NULL && temp->value != value && i - 1 >= 0) {
+        if (temp->value > value) {
+            --i;
+            temp = list->heads[i];
         }
-
-        if(tmp != NULL && tmp->value == value) {
-            return tmp;
-
+        else if (temp->value < value) {
+            --i;
+            temp = temp->next[i];
         }
-
-        tmp = list->heads[i];
+    }
+    if (temp != NULL && temp->value == value)
+    {    return temp;
 
     }
-
     return NULL;
 }
 
+t_d_list* MakeBigList(int n){
+    int* levels = calloc(pow(2, n) - 1, sizeof(int));
+    for(int i = 0; i < pow(2, n) - 1 ; i++) {
 
-#include "fonction.h"
+        int level = 0;
+        int tmp = i + 1;
+        while(tmp % 2 == 0) {
+            tmp = tmp / 2;
+            level++;
+        }
+
+        levels[i] = level;
+    }
+    t_d_list* my_list = create_list(n);
+
+    for(int i = 0; i < pow(2, n) - 1  ; i++) {
+        insert_cell(i, levels[i] + 1, my_list);
+    }
+    return my_list;
+
+}
+
+
+
